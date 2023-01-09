@@ -1,13 +1,22 @@
-import Card from "../assets/types/Card";
+import React from "react";
 import Todo from "../assets/types/todo";
+import Card from "./Card";
+import classes from "./Todos.module.css";
 
-const Todos = (props: { items: Todo[] }) => {
+const Todos = (props: {
+  items: Todo[];
+  onRemoveTodo: (id:string) => void;
+}) => {
   return (
-    <div>
+    <ul className={classes.todos}>
       {props.items.map((item) => (
-        <Card key={item.id} id={item.id} text={item.text} />
+        <Card
+          key={item.id}
+          text={item.text}
+          onRemoveTodo={props.onRemoveTodo.bind(null, item.id)}
+        />
       ))}
-    </div>
+    </ul>
   );
 };
 
